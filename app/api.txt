@@ -1,0 +1,80 @@
++ GET /leagues/
+description: list all league tournaments
+response: [{league_id, title, title_holder, start_date, is_active}, …]
+
++ GET /leagues/active
+description: get the active league tournament
+response: {league_id, title, title_holder, start_date, is_active}
+
++ GET /leagues/:id
+description: get the league tournament by id
+response: {league_id, title, title_holder, start_date, is_active}
+
++ POST/PUT /leagues/ (ADMIN-ONLY)
+description: create/update a league tournament
+request: title
+response: {league_id, title, title_holder, start_date, is_active}
+
++ DELETE /leagues/:id (ADMIN-ONLY)
+description: delete the league tournament
+response: no content
+
+
++ GET /leagues/:id/participants
+description: get the league tournament participants
+response:[{participant_id, name, division, points, average_accuracy, bucholz_rating, average_match_moves, last_form: [W/D/L, …] }]
+
++ POST /leagues/:id/participants (ADMIN-ONLY)
+description: add the league tournament participant
+request: user_id, division
+response: {participant_id, user_id, name, division}
+
++ DELETE /leagues/:id/participants/:id (ADMIN-ONLY)
+description: delete the league tournament participant
+response: no content
+
++ GET /users/
+description: get the chess players
+response: [{user_id, name}, …]
+
++ POST /users/ (ADMIN-ONLY)
+description: create the chess player
+request: {name}
+response: {user_id, name, password (auto-generated)}
+
++ DELETE /users/ (ADMIN-ONLY)
+description: delete the chess player
+request: {user_id}
+response: no content
+
+
+GET /leagues/:id/matches/?limit=&order_by=asc|desc&player_id=
+description: get the all league matches that have been generated based on tournament apply
+response: [{match_id, home_id, home_name, away_id, away_name, round, format: 1-game/bo3, type: league|league-knockout-stage, date}, …]
+
+GET /leagues/:id/matches/:id
+description: get the league match
+response: {match_id, home_id, home_name, away_id, away_name, round, format: 1-game/bo3, type: league|league-knockout-stage, date}
+
+GET /leagues/:id/matches/:id/h2h
+description: get the match rivals all head-to-head matches
+response: [{match_id, home_points, away_points}, …]
+
+
+GET /leagues/:id/fixtures/?limit=&order_by=asc|desc&player_id=
+description: get the all league fixtures
+response: [{fixture_id, match_id, home_points, away_points, home_accuracy, away_accuracy, match_moves}, …]
+
+POST /leagues/:id/fixtures/ (ADMIN-ONLY)
+request: {match_id, home_points, away_points, home_accuracy, away_accuracy, match_moves}
+response: {fixture_id, match_id, home_points, away_points, home_accuracy, away_accuracy, match_moves}
+
+DELETE /leagues/:id/fixtures/ (ADMIN-ONLY)
+response: no content
+
+
++ POST /leagues/:id/start/ (ADMIN-ONLY)
+description: start the tournament and generate upcoming matches
+
++ POST /leagues/:id/stop/ (ADMIN-ONLY)
+description: stop the tournament
