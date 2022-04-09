@@ -1,0 +1,3 @@
+aiohttp==3.8.1
+SQLAlchemy==1.4.34
+sqlalchemy2-stubs==0.0.2a21
