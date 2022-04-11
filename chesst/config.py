@@ -1,3 +1,8 @@
+"""
+All about application config (aiohttp app config and database config).
+"""
+
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

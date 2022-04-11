@@ -1,3 +1,8 @@
+"""
+Application entrypoint.
+"""
+
+
 from argparse import ArgumentParser
 import logging
 from pathlib import Path

@@ -1,3 +1,9 @@
+"""
+Here is all things about aiohttp application like description of handlers,
+routes, creating and running an application.
+"""
+
+
 from .api import routes
 from ..config import Config
 

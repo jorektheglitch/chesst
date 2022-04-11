@@ -1,3 +1,8 @@
+"""
+Models for application's database.
+"""
+
+
 import functools
 from datetime import datetime as dt, timezone as tz
 from secrets import token_urlsafe
@@ -20,6 +25,18 @@ create_token = functools.partial(token_urlsafe, TOKEN_LENGTH)
 
 
 class User(Model):
+    """
+    User model. User identified by string primary key `name`.
+
+    There is a fields for each user:
+      `name` str - unique name of the user.
+      `joined_at` datetime - date which user was registered.
+      `admin_for` datetime - nullable date that user was admin for.
+      `password_hash` str - hexdigest of hash of user's password.
+
+    And there is some properties for user:
+      `is_admin` bool - True if user is admin.
+    """
 
     __tablename__ = "users"
 
@@ -36,6 +53,10 @@ class User(Model):
 
 
 class AccessToken(Model):
+    """
+    AccesssToken is a model for user's access tokens.
+    Each token identifies one user.
+    """
 
     __tablename__ = "access_tokens"
 
@@ -45,6 +66,9 @@ class AccessToken(Model):
 
 
 class League(Model):
+    """
+    League is a bunch of users which play tournaments together.
+    """
 
     __tablename__ = "leagues"
 
